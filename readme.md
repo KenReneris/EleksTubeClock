@@ -21,8 +21,7 @@ Video | Description
 
 Image | Description
 --- | --- 
-<a href="doc_images\esp8266_mounted.JPG">Mounted</a> | The EleksTube controller removed and ESP8266 mounted to the base of the EleksTube case. 
-<a href="doc_images\esp8266_back.JPG">Back</a> | The back of the ESP8266.
+<a href="doc_images\esp8266_mounted.JPG">Mounted</a> | The EleksTube controller removed and ESP8266 mounted to the base of the EleksTube case.  Here's the <a href="doc_images\esp8266_back.JPG">back</a>.
 <a href="doc_images\4pin_1p25mm.JPG">Connector</a> | The female end of the 1.25mm plug. Notice the order of the colors.  The +5 V is the pin closest to the back side of the clock.
 <a href="doc_images\console.JPG">Console</a> | Somce misc commands available on the serial console.
 <a href="doc_images\settings_a.jpg">Settings</a> | Root web page containing links to the common settings.
