@@ -11,7 +11,7 @@ For the clock to work it needs to be configued to connect to a WiFi hotspot. Onc
 Video | Description
 --- | --- 
 <a href="doc_videos\TopOfHour.mp4?raw=true">Top Of Hour</a> | Default Top Of Hour Effect.  Highlight appears, holds for 2 seconds, then Blends Out.
-<a href="doc_videos\PerodicDate.mp4?raw=true">Periodic Date</a> | Optional periodic display of the date.  This example shows the Cross Fade effect with hold set to 3.
+<a href="doc_videos\PeriodicDate.mp4?raw=true">Periodic Date</a> | Optional periodic display of the date.  This example shows the Cross Fade effect with hold set to 3.
 <a href="doc_videos\Popup.mp4?raw=true">Popup URL</a> | Sends a request to the clock to dipslay a popup. In this case '123456' which a Blend In Out effect.
 <a href="doc_videos\BlendInOut.mp4?raw=true">BlendInOut</a> | Another video of the above blend in out effect.
 <a href="doc_videos\boot.mp4?raw=true">Power on</a> | Power on sequence. Clock is already configured for local WiFi access.
@@ -37,7 +37,7 @@ Effect | Description
 --- | --- 
 `Disabled`        | Action/opertion not displayed.
 `Appear`          | Color/values appear and disappear without any transition effect.
-`Cross Fade`      | Show the color/values using a fade to/from black transistions. <a href="doc_videos\PerodicDate.mp4?raw=true">example</a>
+`Cross Fade`      | Show the color/values using a fade to/from black transistions. <a href="doc_videos\PeriodicDate.mp4?raw=true">example</a>
 `Blend In Out`    | Blend to/from color/values. <a href="doc_videos\BlendInOut.mp4?raw=true">example</a>
 `Appear Blend Out` | Color/values appear and then blend out.
 `Flash`           | Color/values flash (1 to 15 times)
