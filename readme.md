@@ -6,6 +6,8 @@ This project replaces the controller that comes with the clock with an <a href='
 <br>
 For the clock to work it needs to be configued to connect to a WiFi hotspot. Once the device has an IP address there are a number of settings which are <b>configured via a few web pages</b> accessible on the device.  Such as 12 or 24 mode, top of hour effect, etc..  The device also sync the current time from the internet and option the timezone (or the timezone can be manually set).
 <br><br>
+<img src="doc_images/clock.jpg" />
+
 ### Some videos:
 
 Video | Description
