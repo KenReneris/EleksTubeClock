@@ -1,0 +1,72 @@
+
+
+Startup:
+    - Make a connector as shown in doc_images and replace the elekstube board.
+    - Compile and flash the sketch into the ESP8266.
+    - On power on all the digits should squence.
+
+Initial power on:
+    - Use your phone and look for the "EleksTube" wifi and connec to it.
+    - Type in your home wifi name and password.
+    - When the clock connects to the network it will display the last value or two of it's IP address.
+  > * All settings for the clock are down via the Web Server interface 
+        - Note the "s" command on the serial port console will show WiFi IP as well.
+
+    On connecting to the local WiFi the clock will contact an NTP server and start showing gmt time.
+
+To set the timezone:
+    - Connect to the device.  E.g. http://192.168.0.XX
+    - Goto to More -> Timezone
+    - Either enter your current date & time (manual)
+  > * Or switch to automatic:
+        - goto https://timezonedb.com/ and register for an API key
+        - enter the key into the form and press submit
+
+Non-time display:
+    Occasionaly the display will display something other then the time or date:
+    - all 0s    Soft AP started
+    - all 1s    Trying to connect to local network
+    - all 2s    WiFi Connection lost
+    - all 3s    WiFi Disconnected
+    - all 6s    WiFi Connection failed
+    - last values of local IP address being used (white)
+    - time turns red brielfy.. WiFi is online but there was a NTP or TZ sync error
+
+Web Settings:
+    - 12 or 24 hour mode
+    - settable schedule for time being displayed
+    - settable schedule for display being dimmed
+    - top of hour effect
+    - quarter of hour effect
+    - periodic display date effect
+    - ntp sync rate
+    - timezone sync or manual adjust
+    - enabled/disable microadjust
+    - optional password
+    
+    - Settable Highlighting Effects:
+        - User supplied color
+        - Disabled. (Same as "No effect" for "0" seconds)
+        - No effect. Display value for 0 to 15 seconds
+        - Cross Fade value in and out.  Hold value for 0 to 15 seconds
+        - Blend value in and out.  Hold value for 0 to 15 seconds
+        - Display value for 0 to 15 seconds, Blend value out
+        - Flash value 0 to 15 times
+
+Microadjust:
+    This feature is under test.  It averages the drift of the ESP8266 crystal as compared to the NTP time
+    and makes a small adjustment to the rate of time being in order to reduce the time error.  This is 
+    probably not really needed if the clock is connected full time to wifi. (on eveyr wifi ntp sync there would
+    be a fraction of a second being set).  The purpose of the feature is that I have one of these clocks at
+    work and it can't stay connected to WiFi.  So once in a while I will let it sync NTP via my phone and in
+    the interim this adjustment will keep it reasonable accurate.
+
+Other Misc URLs:
+    /time                   - returns the current time
+    /forceon?s={seconds}    - if s > 0, forces time-on for # of seconds.  if s < 0, forces time-off for # seconds
+    /forcedim?s={seconds}   - if s > 0, forces dim-on for # of seconds. if s < 0, forces dim-off for # of seconds
+    /popup?d={digits}?e={effect}&h={hold/count}&c={color}
+        - use the /TestPopup.html page to get examples on how to form the popup url
+        - note popup will appear even if the time display has been turned off
+            
+    
