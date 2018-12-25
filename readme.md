@@ -28,7 +28,7 @@ Image | Description
 <a href="doc_images\settings_b.jpg">More Settings</a> | More settings.
 <a href="doc_images\settings_c.jpg">Clock Settings</a> | Example settings page.
 <a href="doc_images\settings_date.jpg">Date Settings</a> | Example of date settings page.
-<a href="doc_images\settings_date_color.jpg">Date Settings Color</a> | Setting the color of the periodic date effect. 
+<a href="doc_images\settings_date_color.jpg">Color Picker</a> | Setting the color of the periodic date effect. Embeded cotnrol from <a href='https://tovic.github.io/color-picker'>Taufik</a>.
 
 <br><br>
 ### Effect types:
