@@ -267,6 +267,10 @@ NextFrame()
         digitShow = EleksDigit::Effect;
         break;
 
+    case GlobalColor::TimeNotSet:
+        SetDigitsTimer( g_poweredOnTime );
+        break;
+
     default:
         break;
     }
@@ -329,6 +333,7 @@ Popup( char const *str, ARGB color )
 }
 
 
+
 void
 OutNl()
 {
@@ -363,6 +368,24 @@ HourMode( int hour )
     }   
     
     return hour;
+}
+
+
+void
+SetDigitsTimer( uint32 time )
+{
+    int     hours       = time / 60 * 60;
+    int     minutes     = ( time - hours*60*60 ) / 60;
+    int     seconds     = ( time - hours*60*60 - minutes*60 );
+
+    SetDigitsXX( EleksDigit::Time, &g_digits[0], hours );
+    SetDigitsXX( EleksDigit::Time, &g_digits[2], minutes );
+    SetDigitsXX( EleksDigit::Time, &g_digits[4], seconds );
+
+    for ( int index = 0; (index < NUM_DIGITS) && (!g_digits[index].GetTimeValue()); ++index )
+    {
+        g_digits[ index ].SetValue( EleksDigit::Time, 10 );
+    }
 }
 
 

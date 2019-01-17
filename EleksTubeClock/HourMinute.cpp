@@ -54,7 +54,7 @@ HourMinute::operator != ( HourMinute const &rh ) const
 
 
 time_t
-HourMinute::NextTime( time_t curTime ) const
+HourMinute::TimeToday( time_t curTime ) const
 { 
     tmElements_t        tm;
     
@@ -65,12 +65,35 @@ HourMinute::NextTime( time_t curTime ) const
     tm.Second   = 0;
 
     // get aligned on users requested hh:min
-    time_t    nextTime = makeTime( tm );
-    if ( nextTime <= curTime )
-    {
-        nextTime += 24 * 60 * 60;
-    }
-    
-    return nextTime;
+    return  makeTime( tm );
 }
+
+
+time_t
+HourMinute::PrevTime( time_t curTime ) const
+{
+    time_t    result = TimeToday( curTime );
+
+    if ( !(result < curTime) )
+    {
+        result -= 24 * 60 * 60;
+    }
+
+    return result;
+}
+
+
+time_t
+HourMinute::NextTime( time_t curTime ) const
+{
+    time_t    result = TimeToday( curTime );
+
+    if ( !(result > curTime) )
+    {
+        result += 24 * 60 * 60;
+    }
+
+    return result;
+}
+
     

@@ -26,6 +26,7 @@ NtpClient::Setup()
 {
     _state = WaitingForWifi;
     g_ntpUdp.begin( NTP_DEFAULT_LOCAL_PORT );
+    g_globalColor.EnableState( GlobalColor::TimeNotSet );
 }
 
 
@@ -65,7 +66,7 @@ NtpClient::GetStateStr() const
 String
 NtpClient::LastSync() const
 {
-    if (_lastSync)
+    if ( _lastSync )
     {
         return Duration( g_poweredOnTime - _lastSync );
     }
@@ -196,6 +197,7 @@ NtpClient::CheckForResponse()
         //
         _lastSync = g_poweredOnTime;
         _lastSyncHadDiff = SetNtpTime( ntpTime, ms );
+        g_globalColor.ClearState( GlobalColor::TimeNotSet );
         SetState( WaitingForSyncTime );
     }
 }

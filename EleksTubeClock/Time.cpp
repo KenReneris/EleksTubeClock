@@ -198,8 +198,6 @@ SetNtpTime( time_t ntpTime, uint32 ntpMs )
     const int64     diffMs      = ( ntpTimeMs - gmtMs );
     bool            resync      = false;
 
-    Log( "Time: %s\n", TimeStr().c_str() );
-
     // skip if time diff is less then 1/4 second
     if ( ABS(diffMs) > 250 ) 
     {
@@ -208,7 +206,7 @@ SetNtpTime( time_t ntpTime, uint32 ntpMs )
         g_lastPosGmtMs  = ntpMs;    
         g_now           = g_gmtTime + g_options._gmtOffset;
 
-        Log( "Time: adjust %ss\n", String( (float(diffMs) / 1000.0), 3).c_str() );
+        Log( "Time: %s, adjust %ss\n", TimeStr().c_str(), String( (float(diffMs) / 1000.0), 3).c_str() );
         UpdateWaitTimes();
 
         // do quick resyncs until we get close
@@ -217,7 +215,8 @@ SetNtpTime( time_t ntpTime, uint32 ntpMs )
     else
     {
         // diff is small.. check for micro adjustment
-        MicroAdjust( ntpTimeMs );        
+        Log( "Time: %s (%d)\n", TimeStr().c_str(), int32( diffMs ) );
+        MicroAdjust( ntpTimeMs );
     }
 
     return resync;

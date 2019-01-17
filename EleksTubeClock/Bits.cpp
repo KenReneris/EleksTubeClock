@@ -35,7 +35,7 @@ FirstSetBit16( uint16 bits )
 {
     if ( bits & 0xFF )
     {
-        return k_firstSetBit[ bits ];
+        return k_firstSetBit[ bits & 0xFF ];
     }
     else
     {

@@ -60,16 +60,17 @@ OnOff::Loop()
         on = true;
         if ( _onTime != _offTime )
         {
-            const time_t  onTime    = _onTime.NextTime( curTime );
-            const time_t  offTime   = _offTime.NextTime( curTime );
-            
-            if ( (curTime >= offTime) && (curTime < onTime) )
+            time_t  onTime    = _onTime.TimeToday( curTime );
+            time_t  offTime   = _offTime.TimeToday( curTime );
+
+            if ( onTime > offTime )
             {
-                on = false;
+                offTime += 24 * 60 * 60;
             }
+
+            on = ( (curTime >= onTime) && (curTime < offTime) );
         }
     }
-    
 
     if ( (_forceEnd) && (g_poweredOnTime < _forceEnd) )
     {

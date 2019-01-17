@@ -17,14 +17,15 @@ public:
     enum State : uint8
     {
         Popup               = 0,        // on top of everything.  note this will display even if the time is off.
-        TimeOff             = 1,        // if in this state, displaying the time (& date) is surpressed.
-        TimeError           = 2,        // some sort of time sync error.  ntp or timezone.
-        ClientRequest       = 3,        // webserver responsing to something.
-        SyncingTimeZone     = 4,        
-        SyncingNtpTime      = 5,
-        Date                = 6,
-        TopOfHour           = 7,
-        QuarterOfHour       = 8,
+        TimeNotSet          = 1,
+        TimeOff             = 2,        // if in this state, displaying the time (& date) is surpressed.
+        TimeError           = 3,        // some sort of time sync error.  ntp or timezone.
+        ClientRequest       = 4,        // webserver responsing to something.
+        SyncingTimeZone     = 5,        
+        SyncingNtpTime      = 6,
+        Date                = 7,
+        TopOfHour           = 8,
+        QuarterOfHour       = 9,
         MaxState
     };
 
@@ -68,6 +69,7 @@ private:
 
 private:
     static const ARGB   k_black;
+    static const ARGB   k_notSet;
     static const ARGB   k_error;
 
 private:

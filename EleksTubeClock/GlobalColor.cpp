@@ -14,6 +14,7 @@
 extern ARGB   g_popupColor;
 
 const ARGB    GlobalColor::k_black  = { (ARGB::BlendInOut | 0), 0x00, 0x00, 0x00 };
+const ARGB    GlobalColor::k_notSet = { (ARGB::BlendOut   | 0), 0x20, 0x00, 0x00 };
 const ARGB    GlobalColor::k_error  = { (ARGB::BlendOut   | 5), 0xFF, 0x00, 0x00 };         
 
 
@@ -36,6 +37,7 @@ GlobalColor::ColorOptions( State state )
     {
         case Popup:             argb = & g_popupColor;              break;
         case TimeOff:           argb = & k_black;                   break;
+        case TimeNotSet:        argb = & k_notSet;                  break;
         case TopOfHour:         argb = & g_options._topOfHour;      break;
         case QuarterOfHour:     argb = & g_options._quarterOfHour;  break;
         case SyncingNtpTime:    argb = & g_options._ntpColor;       break;
@@ -231,46 +233,39 @@ GlobalColor::NextFrame()
     if ( newState != _state )
     {
         ARGB            stateArgb       = *ColorOptions( newState );
-        bool            changeStates    = true;
 
         // Check if we should change states now
-        if ( _state != MaxState )
+        if ( (_state != MaxState) && (!(_activeStates & (1 << _state))) )
         {
-            // if changing, pitch old state
-            if ( changeStates )
-            {
-                _displayStates &= ~(1 << _state);
-            }
+            _displayStates &= ~(1 << _state);
         }
         
-        if ( changeStates )
-        {
-            _state = newState;
-            _stateFlags = stateArgb.alpha;
-            _stateColor = stateArgb;
+        _state = newState;
+        _stateFlags = stateArgb.alpha;
+        _stateColor = stateArgb;
 
-            _holdEnd = 0;
-            _changingState = StateChange::Holding;
+        _holdEnd = 0;
+        _changingState = StateChange::Holding;
 
-            switch ( _stateFlags & ARGB::EffectMask )
-            { 
-            case ARGB::CrossFade:
-                _changingState = StateChange::FadingOut1;
-                _stateColor.alpha = 0;
-                break;
+        switch ( _stateFlags & ARGB::EffectMask )
+        { 
+        case ARGB::CrossFade:
+            _changingState = StateChange::FadingOut1;
+            _stateColor.alpha = 0;
+            break;
 
-            case ARGB::BlendInOut:
-                _changingState = StateChange::BlendingIn;
-                _stateColor.alpha = 0;
-                break;
+        case ARGB::BlendInOut:
+            _changingState = StateChange::BlendingIn;
+            _stateColor.alpha = 0;
+            break;
 
-            case ARGB::Flash:
-                _changingState = StateChange::FlashingOff;
-                _holdEnd = curMs + 50;
-                _flashCount = 0;
-                break;
-            }
+        case ARGB::Flash:
+            _changingState = StateChange::FlashingOff;
+            _holdEnd = curMs + 50;
+            _flashCount = 0;
+            break;
         }
+        
     }
 
     switch( _changingState )
